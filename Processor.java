@@ -8,26 +8,31 @@ package github.com.ricallinson.jmmmarkdown;
 
 import github.com.ricallinson.http.util.Map;
 import github.com.ricallinson.http.util.LinkedListMap;
-import github.com.ricallinson.http.io.BufferedInputStreamReader;
 
 public class Processor {
 
     // Line feed.
-    public static final byte LF = "\n".getBytes()[0];
+    public static final String LF = "\n";
 
     // Holds the found token elements.
     protected Map elements = new LinkedListMap();
 
+    // The rendered HTML.
+    protected String html = "";
+
     // Empty line
     public String parse(String str) {
-        return "";
+        this.tokenize(str);
+        this.elements.forEach((element) -> {
+            this.html += element.value().toString();
+        });
+        return this.html;
     }
 
-    protected int tokenizeBlocks(BufferedInputStreamReader buf) {
-        String line;
+    protected int tokenize(String str) {
+        String[] lines = str.split(this.LF);
         int index = 0;
-        while(buf.hasMore()) {
-            line = new String(buf.readTo(this.LF));
+        for (String line : lines) {
             if (line.trim().length() > 0) {
                 this.parseLine(index, line);
                 index++;

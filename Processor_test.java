@@ -6,7 +6,6 @@
 
 package github.com.ricallinson.jmmmarkdown;
 
-import github.com.ricallinson.http.io.BufferedInputStreamReader;
 import github.com.jminusminus.simplebdd.Test;
 
 public class Processor_test extends Test {
@@ -24,16 +23,21 @@ public class Processor_test extends Test {
     public void test_tokenize() {
         this.should("return the count of block tokens found");
         Processor p = new Processor();
-        BufferedInputStreamReader reader = this.getBasic();
-        int count = p.tokenizeBlocks(reader);
+        int count = p.tokenize(this.getBasic());
         this.assertEqual(35, count);
     }
 
-    protected BufferedInputStreamReader getBasic() {
+    public void test_parse() {
+        this.should("return HTML");
+        Processor p = new Processor();
+        String html = p.parse(this.getBasic());
+        this.assertEqual("<H5>Heading 5</H5>", html.substring(72, 90));
+    }
+
+    protected String getBasic() {
         try {
-            java.io.File initialFile = new java.io.File("fixtures/basic.md");
-            java.io.InputStream targetStream = new java.io.FileInputStream(initialFile);
-            return new BufferedInputStreamReader(targetStream);
+            byte[] encoded = java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("fixtures/basic.md"));
+            return new String(encoded, "UTF8");
         } catch (Exception e) {
             System.out.println(e);
         }

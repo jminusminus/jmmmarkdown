@@ -8,7 +8,13 @@ package github.com.ricallinson.jmmmarkdown;
 
 public class List {
 
-    List(String list) {
+    protected String list;
 
+    List(String list) {
+        this.list = list;
+    }
+
+    public String toString() {
+        return "<li>" + this.list.trim() + "</li>";
     }
 }

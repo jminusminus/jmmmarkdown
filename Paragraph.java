@@ -8,7 +8,13 @@ package github.com.ricallinson.jmmmarkdown;
 
 public class Paragraph {
 
-    Paragraph(String paragraph) {
+    protected String paragraph;
 
+    Paragraph(String paragraph) {
+        this.paragraph = paragraph;
+    }
+
+    public String toString() {
+        return "<p>" + this.paragraph.trim() + "</p>";
     }
 }
