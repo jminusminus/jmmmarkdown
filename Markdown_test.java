@@ -33,6 +33,20 @@ public class Markdown_test extends Test {
         this.assertEqual(35, count);
     }
 
+    public void test_parse_paragraph() {
+        this.should("contain a P tag");
+        Markdown p = new Markdown();
+        String html = p.parseStr("some text").toString();
+        this.assertEqual("<p>some text</p>\n", html);
+    }
+
+    public void test_parse_paragraph_starting_with_space() {
+        this.should("contain a P tag that started with a space");
+        Markdown p = new Markdown();
+        String html = p.parseStr("   some text").toString();
+        this.assertEqual("<p>some text</p>\n", html);
+    }
+
     public void test_parse_heading() {
         this.should("contain a H5 tag");
         Markdown p = new Markdown();
