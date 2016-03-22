@@ -51,7 +51,8 @@ public class Processor {
         if (!this.isList && type.contains("List")) {
             this.isList = true;
             return "<ul>\n";
-        } else if (this.isList && !type.contains("List")) {
+        }
+        if (this.isList && !type.contains("List")) {
             this.isList = false;
             return "</ul>\n";
         }
@@ -62,7 +63,8 @@ public class Processor {
         if (!this.isCode && type.contains("Code")) {
             this.isCode = true;
             return "<pre>\n";
-        } else if (this.isCode && !type.contains("Code")) {
+        }
+        if (this.isCode && !type.contains("Code")) {
             this.isCode = false;
             return "</pre>\n";
         }
@@ -73,7 +75,8 @@ public class Processor {
         if (!this.isBlock && type.contains("Block")) {
             this.isBlock = true;
             return "<pre>\n";
-        } else if (this.isBlock && !type.contains("Block")) {
+        }
+        if (this.isBlock && !type.contains("Block")) {
             this.isBlock = false;
             return "</pre>\n";
         }
@@ -113,7 +116,7 @@ public class Processor {
     protected void parseBlock(int index, String line) {
         switch (line.charAt(0)) {
             case ' ': // Check for block quote
-                if ("    ".equals(line.substring(0, 4))) {
+                if (!this.isCode && "    ".equals(line.substring(0, 4))) {
                     this.elements.put(index, new Block(line));
                     return;
                 }
