@@ -15,6 +15,6 @@ public class Paragraph {
     }
 
     public String toString() {
-        return "<p>" + this.paragraph.trim() + "</p>";
+        return "<p>" + this.paragraph.trim() + "</p>\n";
     }
 }

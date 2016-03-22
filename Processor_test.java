@@ -27,11 +27,25 @@ public class Processor_test extends Test {
         this.assertEqual(35, count);
     }
 
-    public void test_parse() {
-        this.should("return HTML");
+    public void test_parse_heading() {
+        this.should("contain a H5 tag");
         Processor p = new Processor();
-        String html = p.parse(this.getBasic());
-        this.assertEqual("<H5>Heading 5</H5>", html.substring(72, 90));
+        String html = p.parse(this.getBasic()).toString();
+        this.assertEqual(true, html.contains("<H5>Heading 5</H5>"));
+    }
+
+    public void test_parse_block() {
+        this.should("contain a PRE tag");
+        Processor p = new Processor();
+        String html = p.parse(this.getBasic()).toString();
+        this.assertEqual(true, html.contains("<pre>    block quote 4</pre>"));
+    }
+
+    public void test_parse_string_check() {
+        this.should("contain a PRE tag");
+        Processor p = new Processor();
+        String html = p.parse(this.getBasic()).toString();
+        this.assertEqual("", html);
     }
 
     protected String getBasic() {

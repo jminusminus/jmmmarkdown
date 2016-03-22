@@ -6,15 +6,15 @@
 
 package github.com.ricallinson.jmmmarkdown;
 
-public class List {
+public class Code {
 
-    protected String list;
+    protected String code;
 
-    List(String list) {
-        this.list = list;
+    Code(String code) {
+        this.code = code;
     }
 
     public String toString() {
-        return "<li>" + this.list.trim() + "</li>\n";
+        return this.code + "\n";
     }
 }

@@ -21,6 +21,6 @@ public class Title {
     }
 
     public String toString() {
-        return String.format("<H%d>%s</H%d>", this.level, this.text, this.level);
+        return String.format("<H%d>%s</H%d>\n", this.level, this.text, this.level);
     }
 }
