@@ -50,17 +50,21 @@ public class Markdown {
             this.html += this.isBlock(type);
             this.html += element.value().toString();
         });
+        // Close out any remaining elements.
+        this.html += this.isList("");
+        this.html += this.isCode("");
+        this.html += this.isBlock("");
         return this.html;
     }
 
     protected String isList(String type) {
         if (!this.isList && type.contains("List")) {
             this.isList = true;
-            return "<ul>\n";
+            return "<ul>" + Markdown.LF;
         }
         if (this.isList && !type.contains("List")) {
             this.isList = false;
-            return "</ul>\n";
+            return "</ul>" + Markdown.LF;
         }
         return "";
     }
@@ -68,11 +72,11 @@ public class Markdown {
     protected String isCode(String type) {
         if (!this.isCode && type.contains("Code")) {
             this.isCode = true;
-            return "<pre>\n";
+            return "<pre>" + Markdown.LF;
         }
         if (this.isCode && !type.contains("Code")) {
             this.isCode = false;
-            return "</pre>\n";
+            return "</pre>" + Markdown.LF;
         }
         return "";
     }
@@ -80,17 +84,17 @@ public class Markdown {
     protected String isBlock(String type) {
         if (!this.isBlock && type.contains("Block")) {
             this.isBlock = true;
-            return "<pre>\n";
+            return "<pre>" + Markdown.LF;
         }
         if (this.isBlock && !type.contains("Block")) {
             this.isBlock = false;
-            return "</pre>\n";
+            return "</pre>" + Markdown.LF;
         }
         return "";
     }
 
     protected int tokenize(String str) {
-        String[] lines = str.split(this.LF);
+        String[] lines = str.split(Markdown.LF);
         int index = 0;
         for (String line : lines) {
             if (line.trim().length() > 0) {
@@ -101,9 +105,6 @@ public class Markdown {
         return index;
     }
 
-    // Check for link
-    // Check for emphasis
-    // Check for image
     protected void parseLine(int index, String line) {
         switch (line.charAt(0)) {
             case '#': // Check for header
@@ -137,6 +138,21 @@ public class Markdown {
                     return;
                 }
                 this.elements.put(index, new Paragraph(line));
+        }
+    }
+
+    protected int parseInline(int index, String[] lines) {
+        switch (lines[index].charAt(0)) {
+            case '!': // Check for image
+                return index;
+            case '[': // Check for link
+                return index;
+            case '_': // Check for emphasis
+                return index;
+            case '`': // Check for code
+                return index;
+            default: // Text
+                return index;
         }
     }
 }

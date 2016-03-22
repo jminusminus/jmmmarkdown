@@ -11,10 +11,11 @@ public class List {
     protected String list;
 
     List(String list) {
-        this.list = list;
+    	// Remove the list token.
+        this.list = list.substring(1);
     }
 
     public String toString() {
-        return "<li>" + this.list.trim() + "</li>\n";
+        return "<li>" + this.list.trim() + "</li>" + Markdown.LF;
     }
 }

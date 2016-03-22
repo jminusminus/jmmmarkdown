@@ -20,6 +20,12 @@ public class Markdown_test extends Test {
         this.assertEqual("github.com.ricallinson.jmmmarkdown.Markdown", p.getClass().getName());
     }
 
+    public void test_parse() {
+        this.should("return HTML from a static method");
+        String html = Markdown.parse(this.getBasic()).toString();
+        this.assertEqual(true, html.contains("<H4>Heading 4</H4>"));
+    }
+
     public void test_tokenize() {
         this.should("return the count of block tokens found");
         Markdown p = new Markdown();
@@ -38,14 +44,58 @@ public class Markdown_test extends Test {
         this.should("contain a PRE tag");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        this.assertEqual(true, html.contains("<pre>    block quote 4</pre>"));
+        this.assertEqual(true, html.contains("<pre>\n    block quote 1"));
+        this.assertEqual(true, html.contains("    block quote 4\n</pre>"));
     }
 
-    public void test_parse_string_check() {
-        this.should("contain a PRE tag");
+    public void test_parse_code() {
+        this.should("contain a PRE tag with code");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        this.assertEqual("", html);
+        this.assertEqual(true, html.contains("<pre>\ncode block 1"));
+        this.assertEqual(true, html.contains("code block 4\n</pre>"));
+    }
+
+    // public void test_parse_string_check() {
+    //     this.should("contain a PRE tag");
+    //     Markdown p = new Markdown();
+    //     String html = p.parseStr(this.getBasic()).toString();
+    //     this.assertEqual("", html);
+    // }
+
+    public void test_parse_inline_link() {
+        this.should("return an A tag");
+        Markdown p = new Markdown();
+        String html = p.parseStr("[http://foo.com/](text)").toString();
+        this.assertEqual("<a href=\"http://foo.com/\">text</a>", html);
+    }
+
+    public void test_parse_inline_image() {
+        this.should("return an IMG tag");
+        Markdown p = new Markdown();
+        String html = p.parseStr("![http://foo.com/](text)").toString();
+        this.assertEqual("<img src=\"http://foo.com/\" title=\"text\">", html);
+    }
+
+    public void test_parse_inline_bold() {
+        this.should("return an B tag");
+        Markdown p = new Markdown();
+        String html = p.parseStr("__some text__").toString();
+        this.assertEqual("<b>some text</b>", html);
+    }
+
+    public void test_parse_inline_em() {
+        this.should("return an EM tag");
+        Markdown p = new Markdown();
+        String html = p.parseStr("_some text_").toString();
+        this.assertEqual("<em>some text</em>", html);
+    }
+
+    public void test_parse_inline_pre() {
+        this.should("return an PRE tag inline");
+        Markdown p = new Markdown();
+        String html = p.parseStr("`some text`").toString();
+        this.assertEqual("<pre>some text</pre>", html);
     }
 
     protected String getBasic() {

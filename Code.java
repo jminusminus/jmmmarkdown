@@ -15,6 +15,6 @@ public class Code {
     }
 
     public String toString() {
-        return this.code + "\n";
+        return this.code + Markdown.LF;
     }
 }
