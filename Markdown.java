@@ -9,7 +9,7 @@ package github.com.ricallinson.jmmmarkdown;
 import github.com.ricallinson.http.util.Map;
 import github.com.ricallinson.http.util.LinkedListMap;
 
-public class Processor {
+public class Markdown {
 
     // Line feed.
     public static final String LF = "\n";
@@ -30,7 +30,13 @@ public class Processor {
     protected boolean isBlock = false;
 
     // Returns HTML from the given Markdown.
-    public Processor parse(String str) {
+    public static String parse(String str) {
+        Markdown md = new Markdown();
+        return md.parseStr(str).toString();
+    }
+
+    // Returns HTML from the given Markdown.
+    public Markdown parseStr(String str) {
         this.tokenize(str);
         return this;
     }
