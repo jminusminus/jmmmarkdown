@@ -17,7 +17,7 @@ public class Title {
             this.level++;
             title = title.substring(1);
         }
-        this.text = title.trim();
+        this.text = new Elements(title).toString();
     }
 
     public String toString() {

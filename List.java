@@ -16,6 +16,6 @@ public class List {
     }
 
     public String toString() {
-        return "<li>" + this.list.trim() + "</li>" + Markdown.LF;
+        return "<li>" + new Elements(this.list).toString() + "</li>" + Markdown.LF;
     }
 }
