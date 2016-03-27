@@ -35,7 +35,7 @@ public class Markdown {
         return md.parseStr(str).toString();
     }
 
-    // Returns HTML from the given Markdown.
+    // Returns a Markdown instance with the given string parsed.
     public Markdown parseStr(String str) {
         this.tokenize(str);
         return this;
@@ -138,21 +138,6 @@ public class Markdown {
                     return;
                 }
                 this.elements.put(index, new Paragraph(line));
-        }
-    }
-
-    protected int parseInline(int index, String[] lines) {
-        switch (lines[index].charAt(0)) {
-            case '!': // Check for image
-                return index;
-            case '[': // Check for link
-                return index;
-            case '_': // Check for emphasis
-                return index;
-            case '`': // Check for code
-                return index;
-            default: // Text
-                return index;
         }
     }
 }
