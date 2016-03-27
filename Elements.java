@@ -17,6 +17,7 @@ public class Elements {
         this.length = this.tokens.length;
     }
 
+    // Returns HTML.
     public String toString() {
         String elements = "";
         String element;
@@ -29,6 +30,7 @@ public class Elements {
         return elements.trim();
     }
 
+    // Walks the tokens to find the next element and returns a HTML string for what it finds.
     protected String parseToken() {
         if (this.tokens[this.index].isEmpty()) {
             this.index++;
