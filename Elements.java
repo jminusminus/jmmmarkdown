@@ -19,8 +19,12 @@ public class Elements {
 
     public String toString() {
         String elements = "";
+        String element;
         while (this.index < this.tokens.length) {
-            elements += this.parseToken() + " ";
+            element = this.parseToken();
+            if (element.isEmpty() == false) {
+                elements += element + " ";
+            }
         }
         return elements.trim();
     }
@@ -75,7 +79,17 @@ public class Elements {
     // `some text`
     // <pre>some text</pre>
     protected String parseCode() {
-        this.index++;
-        return this.tokens[this.index - 1];
+        String token = "";
+        String element = "";
+        int end = 0;
+        while (this.index < this.length) {
+            element += this.tokens[this.index] + " ";
+            end = element.length();
+            if (element.charAt(end - 1) == '`') {
+                break;
+            }
+            this.index++;
+        }
+        return "<pre>" + element.substring(1, end - 2) + "</pre>";
     }
 }

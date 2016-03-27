@@ -109,7 +109,7 @@ public class Markdown_test extends Test {
         this.should("return an PRE tag inline");
         Markdown p = new Markdown();
         String html = p.parseStr("`some text`").toString();
-        this.assertEqual("<pre>some text</pre>", html);
+        this.assertEqual("<p><pre>some text</pre></p>\n", html);
     }
 
     protected String getBasic() {
