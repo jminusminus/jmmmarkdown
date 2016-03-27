@@ -53,16 +53,20 @@ public class Elements {
     // [http://foo.com/](some text)
     // <a href="http://foo.com/">text</a>
     protected String parseLink() {
-        this.index++;
-        return this.tokens[this.index - 1];
+        String element = this.findLink();
+        String url = this.findSection(element, '[', ']');
+        String text = this.findSection(element, '(', ')');
+        return "<a href=\"" + url + "\">" + text + "</a>";
     }
 
     // Look at future tokens to find the last round bracket "![]()"
     // ![http://foo.com/](some text)
-    // <img src="http://foo.com/" title="text">
+    // <img src="http://foo.com/" alt="text">
     protected String parseImage() {
-        this.index++;
-        return this.tokens[this.index - 1];
+        String element = this.findLink();
+        String url = this.findSection(element, '[', ']');
+        String text = this.findSection(element, '(', ')');
+        return "<img src=\"" + url + "\" alt=\"" + text + "\">";
     }
 
     // Count the number of underscores and then look for the matching count in future tokens.
@@ -105,5 +109,48 @@ public class Elements {
             this.index++;
         }
         return "<pre>" + element.substring(1, end - 2) + "</pre>";
+    }
+
+    // Look at future tokens to find the last round bracket "[]()"
+    protected String findLink() {
+        String token = "";
+        String element = "";
+        int end = 0;
+        while (this.index < this.length) {
+            element += this.tokens[this.index] + " ";
+            end = element.length();
+            if (element.charAt(end - 1) == ']') {
+                return element.substring(0, end - 1);
+            }
+            if (element.charAt(end - 1) == ')') {
+                break;
+            }
+            this.index++;
+        }
+        return element.trim();
+    }
+
+    // Finds a section between the start and end chars provided.
+    // [some text] == some text
+    // [some [] text] == some [] text
+    protected String findSection(String element, char start, char end) {
+        int sectionStart = -1;
+        int sectionEnd = 0;
+        int sections = 0;
+        while (sectionEnd < element.length()) {
+            if (element.charAt(sectionEnd) == start) {
+                sections++;
+                if (sectionStart == -1) {
+                    sectionStart = sectionEnd;
+                }
+            } else if (element.charAt(sectionEnd) == end) {
+                sections--;
+            }
+            if (sectionStart > -1 && sections == 0) {
+                return element.substring(sectionStart + 1, sectionEnd);
+            }
+            sectionEnd++;
+        }
+        return element;
     }
 }
