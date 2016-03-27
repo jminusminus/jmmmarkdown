@@ -71,8 +71,22 @@ public class Elements {
     // __some text__
     // <b>some text</b>
     protected String parseEmphasis() {
-        this.index++;
-        return this.tokens[this.index - 1];
+        String token = "";
+        String element = "";
+        int start = 1;
+        int end = 0;
+        while (this.index < this.length) {
+            element += this.tokens[this.index] + " ";
+            end = element.length();
+            if (element.charAt(end - 1) == '_') {
+                break;
+            }
+            this.index++;
+        }
+        if (element.charAt(1) == '_' && element.charAt(end - 3) == '_') {
+            return "<b>" + element.substring(2, end - 3) + "</b>";
+        }
+        return "<em>" + element.substring(start, end - 2) + "</em>";
     }
 
     // Count the number of back ticks and then look for the matching count in future tokens.

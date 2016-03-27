@@ -95,14 +95,14 @@ public class Markdown_test extends Test {
         this.should("return an B tag");
         Markdown p = new Markdown();
         String html = p.parseStr("__some text__").toString();
-        this.assertEqual("<b>some text</b>", html);
+        this.assertEqual("<p><b>some text</b></p>\n", html);
     }
 
     public void test_parse_inline_em() {
         this.should("return an EM tag");
         Markdown p = new Markdown();
         String html = p.parseStr("_some text_").toString();
-        this.assertEqual("<em>some text</em>", html);
+        this.assertEqual("<p><em>some text</em></p>\n", html);
     }
 
     public void test_parse_inline_pre() {
