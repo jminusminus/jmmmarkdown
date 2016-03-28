@@ -72,7 +72,7 @@ public class Markdown {
     protected String isCode(String type) {
         if (!this.isCode && type.contains("Code")) {
             this.isCode = true;
-            return "<pre><code>" + Markdown.LF;
+            return "<pre><code>";
         }
         if (this.isCode && !type.contains("Code")) {
             this.isCode = false;
@@ -84,7 +84,7 @@ public class Markdown {
     protected String isBlock(String type) {
         if (!this.isBlock && type.contains("Block")) {
             this.isBlock = true;
-            return "<pre>" + Markdown.LF;
+            return "<pre>";
         }
         if (this.isBlock && !type.contains("Block")) {
             this.isBlock = false;
