@@ -7,4 +7,5 @@
 #
 
 echo "Pretest Script Running"
+. $JMMHOME/jmm.sh
 jmm get github.com/ricallinson/http
