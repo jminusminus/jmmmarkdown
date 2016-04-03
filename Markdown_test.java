@@ -66,7 +66,6 @@ public class Markdown_test extends Test {
         this.should("contain a PRE tag with code");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        System.out.println(html);
         this.assertEqual(true, html.contains("<pre><code>code block 1"));
         this.assertEqual(true, html.contains("code block 4\n</code></pre>"));
     }
