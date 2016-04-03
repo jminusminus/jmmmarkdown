@@ -44,6 +44,6 @@ public class Title_test extends Test {
     public void test_toString() {
         this.should("return HTML");
         Title t = new Title("##### Five");
-        this.assertEqual("<H5>Five</H5>", t.toString());
+        this.assertEqual("<H5>Five</H5>\n", t.toString());
     }
 }

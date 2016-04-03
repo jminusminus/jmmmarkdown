@@ -58,7 +58,7 @@ public class Markdown_test extends Test {
         this.should("contain a PRE tag");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        this.assertEqual(true, html.contains("<pre>\n    block quote 1"));
+        this.assertEqual(true, html.contains("<pre>    block quote 1"));
         this.assertEqual(true, html.contains("    block quote 4\n</pre>"));
     }
 
@@ -66,16 +66,10 @@ public class Markdown_test extends Test {
         this.should("contain a PRE tag with code");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        this.assertEqual(true, html.contains("<pre><code>\ncode block 1"));
+        System.out.println(html);
+        this.assertEqual(true, html.contains("<pre><code>code block 1"));
         this.assertEqual(true, html.contains("code block 4\n</code></pre>"));
     }
-
-    // public void test_parse_string_check() {
-    //     this.should("contain a PRE tag");
-    //     Markdown p = new Markdown();
-    //     String html = p.parseStr(this.getBasic()).toString();
-    //     this.assertEqual("", html);
-    // }
 
     public void test_parse_inline_link() {
         this.should("return an A tag");
