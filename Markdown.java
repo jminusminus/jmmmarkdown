@@ -97,7 +97,7 @@ public class Markdown {
         String[] lines = str.split(Markdown.LF);
         int index = 0;
         for (String line : lines) {
-            if (line.trim().length() > 0) {
+            if (line.trim().length() > 0 || this.isCode) {
                 this.parseLine(index, line);
                 index++;
             }
