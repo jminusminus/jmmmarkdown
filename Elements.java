@@ -56,8 +56,9 @@ public class Elements {
     // <a href="http://foo.com/">text</a>
     protected String parseLink() {
         String element = this.findLink();
-        String url = this.findSection(element, '[', ']');
-        String text = this.findSection(element, '(', ')');
+        String text = this.findSection(element, '[', ']');
+        String url = this.findSection(element, '(', ')');
+        text = new Elements(text).toString();
         return "<a href=\"" + url + "\">" + text + "</a>";
     }
 
@@ -66,8 +67,8 @@ public class Elements {
     // <img src="http://foo.com/" alt="text">
     protected String parseImage() {
         String element = this.findLink();
-        String url = this.findSection(element, '[', ']');
-        String text = this.findSection(element, '(', ')');
+        String text = this.findSection(element, '[', ']');
+        String url = this.findSection(element, '(', ')');
         return "<img src=\"" + url + "\" alt=\"" + text + "\">";
     }
 
