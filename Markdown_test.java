@@ -4,7 +4,7 @@
 // See the accompanying LICENSE file for terms.
 //
 
-package github.com.ricallinson.jmmmarkdown;
+package github.com.jminusminus.markdown;
 
 import github.com.jminusminus.simplebdd.Test;
 
@@ -17,7 +17,7 @@ public class Markdown_test extends Test {
     public void test_new_Markdown() {
         this.should("return an instance of Markdown");
         Markdown p = new Markdown();
-        this.assertEqual("github.com.ricallinson.jmmmarkdown.Markdown", p.getClass().getName());
+        this.assertEqual("github.com.jminusminus.markdown.Markdown", p.getClass().getName());
     }
 
     public void test_parse() {

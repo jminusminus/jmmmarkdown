@@ -4,7 +4,7 @@
 // See the accompanying LICENSE file for terms.
 //
 
-package github.com.ricallinson.jmmmarkdown;
+package github.com.jminusminus.markdown;
 
 import github.com.jminusminus.simplebdd.Test;
 
@@ -17,7 +17,7 @@ public class Title_test extends Test {
     public void test_new_Title() {
         this.should("return an instance of Title");
         Title t = new Title("");
-        this.assertEqual("github.com.ricallinson.jmmmarkdown.Title", t.getClass().getName());
+        this.assertEqual("github.com.jminusminus.markdown.Title", t.getClass().getName());
     }
 
     public void test_h1() {

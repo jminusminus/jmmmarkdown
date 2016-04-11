@@ -4,7 +4,7 @@
 // See the accompanying LICENSE file for terms.
 //
 
-package github.com.ricallinson.jmmmarkdown;
+package github.com.jminusminus.markdown;
 
 import github.com.ricallinson.http.util.Map;
 import github.com.ricallinson.http.util.LinkedListMap;
