@@ -98,7 +98,7 @@ public class Elements {
 
     // Count the number of back ticks and then look for the matching count in future tokens.
     // `some text`
-    // <pre>some text</pre>
+    // <code>some text</code>
     protected String parseCode() {
         String token = "";
         String element = "";
@@ -106,12 +106,12 @@ public class Elements {
         while (this.index < this.length) {
             element += this.tokens[this.index] + " ";
             end = element.length();
-            if (element.charAt(end - 1) == '`') {
+            this.index++;
+            if (element.charAt(end - 2) == '`') {
                 break;
             }
-            this.index++;
         }
-        return "<pre>" + element.substring(1, end - 2) + "</pre>";
+        return "<code>" + element.substring(1, end - 2) + "</code>";
     }
 
     // Look at future tokens to find the last round bracket "[]()"

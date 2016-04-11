@@ -84,6 +84,13 @@ public class Markdown_test extends Test {
         this.assertEqual("<p><img src=\"http://foo.com/\" alt=\"text\"></p>\n", html);
     }
 
+    public void test_parse_inline_code() {
+        this.should("return an CODE tag");
+        Markdown p = new Markdown();
+        String html = p.parseStr("words `code here` more words").toString();
+        this.assertEqual("<p>words <code>code here</code> more words</p>\n", html);
+    }
+
     public void test_parse_inline_bold() {
         this.should("return an B tag");
         Markdown p = new Markdown();
@@ -96,13 +103,6 @@ public class Markdown_test extends Test {
         Markdown p = new Markdown();
         String html = p.parseStr("_some text_").toString();
         this.assertEqual("<p><em>some text</em></p>\n", html);
-    }
-
-    public void test_parse_inline_pre() {
-        this.should("return an PRE tag inline");
-        Markdown p = new Markdown();
-        String html = p.parseStr("`some text`").toString();
-        this.assertEqual("<p><pre>some text</pre></p>\n", html);
     }
 
     protected String getBasic() {
