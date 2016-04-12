@@ -20,7 +20,7 @@ public class Markdown_test extends Test {
         this.assertEqual("github.com.jminusminus.markdown.Markdown", p.getClass().getName());
     }
 
-    public void test_parse() {
+    public void test_parse_basic() {
         this.should("return HTML from a static method");
         String html = Markdown.parse(this.getBasic()).toString();
         this.assertEqual(true, html.contains("<H4>Heading 4</H4>"));
