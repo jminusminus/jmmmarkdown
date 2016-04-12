@@ -148,7 +148,7 @@ public class Markdown {
     }
 
     protected String isParagraph(String type) {
-        if (this.isCode || this.isBlock) {
+        if (this.isCode) {
             return "";
         }
         if (!this.isParagraph && type.contains("Paragraph")) {
