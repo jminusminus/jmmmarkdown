@@ -91,6 +91,13 @@ public class Markdown_test extends Test {
         this.assertEqual("<p>a link of <a href=\"http://foo.com/\">text</a> to nowhere</p>\n", html);
     }
 
+    public void test_parse_inline_link_with_image() {
+        this.should("return an A tag with an image in it");
+        Markdown p = new Markdown();
+        String html = p.parseStr("[![image](http://image.com/)](http://foo.com/)").toString();
+        this.assertEqual("<p><a href=\"http://foo.com/\"><img src=\"http://image.com/\" alt=\"image\"></a></p>\n", html);
+    }
+
     public void test_parse_inline_image() {
         this.should("return an IMG tag");
         Markdown p = new Markdown();

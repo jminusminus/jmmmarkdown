@@ -56,8 +56,8 @@ public class Elements {
     // <a href="http://foo.com/">text</a>
     protected String parseLink() {
         String element = this.findLink();
-        String text = this.findSection(element, '[', ']');
-        String url = this.findSection(element, '(', ')');
+        String text = this.findFirstSection(element, '[', ']');
+        String url = this.findLastSection(element, '(', ')');
         text = new Elements(text).toString();
         return "<a href=\"" + url + "\">" + text + "</a>";
     }
@@ -67,8 +67,8 @@ public class Elements {
     // <img src="http://foo.com/" alt="text">
     protected String parseImage() {
         String element = this.findLink();
-        String text = this.findSection(element, '[', ']');
-        String url = this.findSection(element, '(', ')');
+        String text = this.findFirstSection(element, '[', ']');
+        String url = this.findFirstSection(element, '(', ')');
         return "<img src=\"" + url + "\" alt=\"" + text + "\">";
     }
 
@@ -136,7 +136,31 @@ public class Elements {
     // Finds a section between the start and end chars provided.
     // [some text] == some text
     // [some [] text] == some [] text
-    protected String findSection(String element, char start, char end) {
+    protected String findLastSection(String element, char start, char end) {
+        int sectionStart = element.length() - 1;
+        int sectionEnd = -1;
+        int sections = 0;
+        while (sectionStart >= 0) {
+            if (element.charAt(sectionStart) == end) {
+                sections++;
+                if (sectionEnd == -1) {
+                    sectionEnd = sectionStart;
+                }
+            } else if (element.charAt(sectionStart) == start) {
+                sections--;
+            }
+            if (sectionEnd > -1 && sections == 0) {
+                return element.substring(sectionStart + 1, sectionEnd);
+            }
+            sectionStart--;
+        }
+        return element;
+    }
+
+    // Finds a section between the start and end chars provided.
+    // [some text] == some text
+    // [some [] text] == some [] text
+    protected String findFirstSection(String element, char start, char end) {
         int sectionStart = -1;
         int sectionEnd = 0;
         int sections = 0;
