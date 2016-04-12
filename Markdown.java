@@ -26,14 +26,6 @@ import github.com.jminusminus.http.util.LinkedListMap;
 //     ## This is an H2
 //     ###### This is an H6
 //
-// ### Blockquotes
-//
-// To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces. For example, given this input:
-//
-//     This is a normal paragraph:
-//     
-//         This is a code block.
-//
 // ### Lists
 //
 // Unordered lists use asterisks, pluses, and hyphens interchangeably as list markers:
@@ -56,14 +48,27 @@ import github.com.jminusminus.http.util.LinkedListMap;
 //
 // ### Code Blocks
 //
-// Pre-formatted code blocks are used for writing about programming or markup source code.
+// To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces. For example, given this input:
+//
+//     This is a normal paragraph:
+//     
+//         This is a code block.
+//
+// For pre-formatted code blocks specifing a langauge use three back tick quotes (```) on a line by them selfs.
 //
 //     ```
 //     function foo() {
 //         return "bar";   
 //     }
 //     ```
-// 
+//
+// Optional you can provide a language hint.
+//
+//     ```javascript
+//     function foo() {
+//         return "bar";   
+//     }
+//     ```
 // ### Links
 // 
 // To create an inline link, use a set of regular parentheses immediately after the link texts closing square bracket. Inside the parentheses, put the URL where you want the link to point. For example:
@@ -136,14 +141,14 @@ public class Markdown {
             this.html += this.isParagraph(type);
             this.html += this.isList(type);
             this.html += this.isCode(type);
-            this.html += this.isBlock(type);
+            // this.html += this.isBlock(type);
             this.html += element.value().toString();
         });
         // Close out any remaining elements.
         this.html += this.isParagraph("");
         this.html += this.isList("");
         this.html += this.isCode("");
-        this.html += this.isBlock("");
+        // this.html += this.isBlock("");
         return this.html;
     }
 
@@ -189,17 +194,17 @@ public class Markdown {
         return "";
     }
 
-    protected String isBlock(String type) {
-        if (!this.isBlock && type.contains("Block")) {
-            this.isBlock = true;
-            return "<pre>";
-        }
-        if (this.isBlock && !type.contains("Block")) {
-            this.isBlock = false;
-            return "</pre>" + Markdown.LF;
-        }
-        return "";
-    }
+    // protected String isBlock(String type) {
+    //     if (!this.isBlock && type.contains("Block")) {
+    //         this.isBlock = true;
+    //         return "<pre>";
+    //     }
+    //     if (this.isBlock && !type.contains("Block")) {
+    //         this.isBlock = false;
+    //         return "</pre>" + Markdown.LF;
+    //     }
+    //     return "";
+    // }
 
     protected int tokenize(String str) {
         String[] lines = str.split(Markdown.LF);
@@ -232,7 +237,7 @@ public class Markdown {
         switch (line.charAt(0)) {
             case ' ': // Check for block quote
                 if (!this.isCode && "    ".equals(line.substring(0, 4))) {
-                    this.elements.put(index, new Block(line));
+                    this.elements.put(index, new Code(line.substring(4)));
                     return;
                 }
             case '`': // Check for code

@@ -62,15 +62,15 @@ public class Markdown_test extends Test {
     }
 
     public void test_parse_block() {
-        this.should("contain a PRE tag");
+        this.should("contains a PRE tag from code block");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        this.assertEqual(true, html.contains("<pre>block quote 1"));
-        this.assertEqual(true, html.contains("block quote 4\n</pre>"));
+        this.assertEqual(true, html.contains("<pre><code>block quote 1"));
+        this.assertEqual(true, html.contains("block quote 4\n</code></pre>"));
     }
 
     public void test_parse_code() {
-        this.should("contain a PRE tag with code");
+        this.should("contain a PRE tag from code quote");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
         this.assertEqual(true, html.contains("<pre><code>code block 1"));

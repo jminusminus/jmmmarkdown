@@ -27,14 +27,6 @@ Headers use 1-6 hash characters at the start of the line, corresponding to heade
     ## This is an H2
     ###### This is an H6
 
-### Blockquotes
-
-To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces. For example, given this input:
-
-    This is a normal paragraph:
-
-         This is a code block.
-
 ### Lists
 
 Unordered lists use asterisks, pluses, and hyphens interchangeably as list markers:
@@ -57,7 +49,13 @@ and:
 
 ### Code Blocks
 
-Pre-formatted code blocks are used for writing about programming or markup source code.
+To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces. For example, given this input:
+
+    This is a normal paragraph:
+
+         This is a code block.
+
+For pre-formatted code blocks specifing a langauge use three back tick quotes (```) on a line by them selfs.
 
     ```
     function foo() {
@@ -65,6 +63,13 @@ Pre-formatted code blocks are used for writing about programming or markup sourc
     }
     ```
 
+Optional you can provide a language hint.
+
+    ```javascript
+    function foo() {
+         return "bar";
+    }
+    ```
 ### Links
 
 To create an inline link, use a set of regular parentheses immediately after the link texts closing square bracket. Inside the parentheses, put the URL where you want the link to point. For example:
