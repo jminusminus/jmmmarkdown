@@ -30,7 +30,7 @@ public class Markdown_test extends Test {
         this.should("return the count of block tokens found");
         Markdown p = new Markdown();
         int count = p.tokenize(this.getBasic());
-        this.assertEqual(35, count);
+        this.assertEqual(37, count);
     }
 
     public void test_parse_paragraph() {
@@ -38,6 +38,13 @@ public class Markdown_test extends Test {
         Markdown p = new Markdown();
         String html = p.parseStr("some text").toString();
         this.assertEqual("<p>some text</p>\n", html);
+    }
+
+    public void test_parse_paragraph_lines() {
+        this.should("contains a P tag with many lines");
+        Markdown p = new Markdown();
+        String html = p.parseStr("some text.\nmore text.\nand more.").toString();
+        this.assertEqual("<p>some text.<br/>more text.<br/>and more.</p>\n", html);
     }
 
     public void test_parse_paragraph_starting_with_space() {
@@ -130,7 +137,7 @@ public class Markdown_test extends Test {
         this.should("return an B tag");
         Markdown p = new Markdown();
         String html = p.parseStr("__some text__").toString();
-        this.assertEqual("<p><b>some text</b></p>\n", html);
+        this.assertEqual("<p><strong>some text</strong></p>\n", html);
     }
 
     public void test_parse_inline_em() {

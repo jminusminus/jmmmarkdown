@@ -15,6 +15,6 @@ public class Paragraph {
     }
 
     public String toString() {
-        return "<p>" + new Elements(this.paragraph).toString() + "</p>\n";
+        return (new Elements(this.paragraph).toString());
     }
 }

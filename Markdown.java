@@ -105,6 +105,9 @@ public class Markdown {
     // The rendered HTML.
     protected String html = "";
 
+    // Marks if a loop is in a paragraph.
+    protected boolean isParagraph = false;
+
     // Marks if a loop is in a code block.
     protected boolean isCode = false;
 
@@ -130,16 +133,36 @@ public class Markdown {
     public String toString() {
         this.elements.forEach((element) -> {
             String type = element.value().getClass().getName();
+            this.html += this.isParagraph(type);
             this.html += this.isList(type);
             this.html += this.isCode(type);
             this.html += this.isBlock(type);
             this.html += element.value().toString();
         });
         // Close out any remaining elements.
+        this.html += this.isParagraph("");
         this.html += this.isList("");
         this.html += this.isCode("");
         this.html += this.isBlock("");
         return this.html;
+    }
+
+    protected String isParagraph(String type) {
+        if (this.isCode || this.isBlock) {
+            return "";
+        }
+        if (!this.isParagraph && type.contains("Paragraph")) {
+            this.isParagraph = true;
+            return "<p>";
+        }
+        if (this.isParagraph && !type.contains("Paragraph")) {
+            this.isParagraph = false;
+            return "</p>" + Markdown.LF;
+        }
+        if (this.isParagraph) {
+            return "<br/>";
+        }
+        return "";
     }
 
     protected String isList(String type) {

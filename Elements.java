@@ -91,7 +91,7 @@ public class Elements {
             this.index++;
         }
         if (element.charAt(1) == '_' && element.charAt(end - 3) == '_') {
-            return "<b>" + element.substring(2, end - 3) + "</b>";
+            return "<strong>" + element.substring(2, end - 3) + "</strong>";
         }
         return "<em>" + element.substring(start, end - 2) + "</em>";
     }
