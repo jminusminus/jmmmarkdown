@@ -85,10 +85,31 @@ public class Markdown_test extends Test {
     }
 
     public void test_parse_inline_code() {
-        this.should("return an CODE tag");
+        this.should("return a CODE tag");
         Markdown p = new Markdown();
         String html = p.parseStr("words `code here` more words").toString();
         this.assertEqual("<p>words <code>code here</code> more words</p>\n", html);
+    }
+
+    public void test_parse_inline_code_all() {
+        this.should("return a CODE tag wrapping all the text");
+        Markdown p = new Markdown();
+        String html = p.parseStr("`code here`\n").toString();
+        this.assertEqual("<p><code>code here</code></p>\n", html);
+    }
+
+    public void test_parse_inline_code_start() {
+        this.should("return a CODE tag at the start");
+        Markdown p = new Markdown();
+        String html = p.parseStr("\n`code here` more words").toString();
+        this.assertEqual("<p><code>code here</code> more words</p>\n", html);
+    }
+
+    public void test_parse_inline_code_end() {
+        this.should("return a CODE tag at the end");
+        Markdown p = new Markdown();
+        String html = p.parseStr("words `code here`\n").toString();
+        this.assertEqual("<p>words <code>code here</code></p>\n", html);
     }
 
     public void test_parse_inline_bold() {

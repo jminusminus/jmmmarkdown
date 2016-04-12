@@ -21,10 +21,10 @@ public class Elements {
     public String toString() {
         String elements = "";
         String element;
-        while (this.index < this.tokens.length) {
+        while (this.index < this.length) {
             element = this.parseToken();
             if (element.isEmpty() == false) {
-                elements += element + " ";
+                elements += " " + element;
             }
         }
         return elements.trim();
@@ -104,14 +104,14 @@ public class Elements {
         String element = "";
         int end = 0;
         while (this.index < this.length) {
-            element += this.tokens[this.index] + " ";
+            element += " " + this.tokens[this.index];
             end = element.length();
             this.index++;
-            if (element.charAt(end - 2) == '`') {
+            if (element.charAt(end - 1) == '`') {
                 break;
             }
         }
-        return "<code>" + element.substring(1, end - 2) + "</code>";
+        return "<code>" + element.trim().substring(1, end - 2) + "</code>";
     }
 
     // Look at future tokens to find the last round bracket "[]()"
