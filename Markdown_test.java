@@ -94,7 +94,7 @@ public class Markdown_test extends Test {
     public void test_parse_inline_code_all() {
         this.should("return a CODE tag wrapping all the text");
         Markdown p = new Markdown();
-        String html = p.parseStr("`code here`\n").toString();
+        String html = p.parseStr("`code here`\r\n").toString();
         this.assertEqual("<p><code>code here</code></p>\n", html);
     }
 

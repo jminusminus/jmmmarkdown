@@ -104,14 +104,14 @@ public class Elements {
         String element = "";
         int end = 0;
         while (this.index < this.length) {
-            element += " " + this.tokens[this.index];
-            end = element.length();
+            element = (element + " " + this.tokens[this.index]).trim();
+            end = element.length() - 1;
             this.index++;
-            if (element.charAt(end - 1) == '`') {
+            if (element.charAt(end) == '`') {
                 break;
             }
         }
-        return "<code>" + element.trim().substring(1, end - 2) + "</code>";
+        return "<code>" + element.substring(1, end) + "</code>";
     }
 
     // Look at future tokens to find the last round bracket "[]()"
