@@ -37,7 +37,7 @@ To produce a code block in Markdown, simply indent every line of the block by at
 
 ### Lists
 
-Unordered lists use asterisks, pluses, and hyphens — interchangeably — as list markers:
+Unordered lists use asterisks, pluses, and hyphens interchangeably as list markers:
 
     * Red
     * Green
