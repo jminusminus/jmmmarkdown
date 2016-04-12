@@ -58,8 +58,8 @@ public class Markdown_test extends Test {
         this.should("contain a PRE tag");
         Markdown p = new Markdown();
         String html = p.parseStr(this.getBasic()).toString();
-        this.assertEqual(true, html.contains("<pre>    block quote 1"));
-        this.assertEqual(true, html.contains("    block quote 4\n</pre>"));
+        this.assertEqual(true, html.contains("<pre>block quote 1"));
+        this.assertEqual(true, html.contains("block quote 4\n</pre>"));
     }
 
     public void test_parse_code() {
@@ -77,11 +77,25 @@ public class Markdown_test extends Test {
         this.assertEqual("<p><a href=\"http://foo.com/\">text</a></p>\n", html);
     }
 
+    public void test_parse_inline_link_with_text() {
+        this.should("return an A tag with text around it");
+        Markdown p = new Markdown();
+        String html = p.parseStr("a link of [text](http://foo.com/) to nowhere").toString();
+        this.assertEqual("<p>a link of <a href=\"http://foo.com/\">text</a> to nowhere</p>\n", html);
+    }
+
     public void test_parse_inline_image() {
         this.should("return an IMG tag");
         Markdown p = new Markdown();
         String html = p.parseStr("![text](http://foo.com/)").toString();
         this.assertEqual("<p><img src=\"http://foo.com/\" alt=\"text\"></p>\n", html);
+    }
+
+    public void test_parse_inline_image_with_text() {
+        this.should("return an IMG tag with text around it");
+        Markdown p = new Markdown();
+        String html = p.parseStr("the image ![text](http://foo.com/) of nothing").toString();
+        this.assertEqual("<p>the image <img src=\"http://foo.com/\" alt=\"text\"> of nothing</p>\n", html);
     }
 
     public void test_parse_inline_code() {

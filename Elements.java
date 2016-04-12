@@ -120,15 +120,15 @@ public class Elements {
         String element = "";
         int end = 0;
         while (this.index < this.length) {
-            element += this.tokens[this.index] + " ";
-            end = element.length();
-            if (element.charAt(end - 1) == ']') {
-                return element.substring(0, end - 1);
+            element = (element + " " + this.tokens[this.index]).trim();
+            end = element.length() - 1;
+            this.index++;
+            if (element.charAt(end) == ']') {
+                return element.substring(0, end);
             }
-            if (element.charAt(end - 1) == ')') {
+            if (element.charAt(end) == ')') {
                 break;
             }
-            this.index++;
         }
         return element.trim();
     }

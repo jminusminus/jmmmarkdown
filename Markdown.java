@@ -36,7 +36,7 @@ import github.com.jminusminus.http.util.LinkedListMap;
 //
 // ### Lists
 //
-// Unordered lists use asterisks, pluses, and hyphens — interchangeably — as list markers:
+// Unordered lists use asterisks, pluses, and hyphens interchangeably as list markers:
 //
 //     * Red
 //     * Green
