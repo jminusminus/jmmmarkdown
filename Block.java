@@ -11,7 +11,7 @@ public class Block {
     protected String block;
 
     Block(String block) {
-        this.block = block;
+        this.block = block.substring(4);
     }
 
     public String toString() {
