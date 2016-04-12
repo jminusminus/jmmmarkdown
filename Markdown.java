@@ -6,8 +6,8 @@
 
 package github.com.jminusminus.markdown;
 
-import github.com.ricallinson.http.util.Map;
-import github.com.ricallinson.http.util.LinkedListMap;
+import github.com.jminusminus.http.util.Map;
+import github.com.jminusminus.http.util.LinkedListMap;
 
 public class Markdown {
 
