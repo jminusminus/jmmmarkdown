@@ -119,9 +119,6 @@ public class Markdown {
     // Marks if a loop is in a list.
     protected boolean isList = false;
 
-    // Marks if a loop is in a block.
-    protected boolean isBlock = false;
-
     // Returns HTML from the given Markdown string.
     public static String parse(String str) {
         Markdown md = new Markdown();
@@ -141,14 +138,12 @@ public class Markdown {
             this.html += this.isParagraph(type);
             this.html += this.isList(type);
             this.html += this.isCode(type);
-            // this.html += this.isBlock(type);
             this.html += element.value().toString();
         });
         // Close out any remaining elements.
         this.html += this.isParagraph("");
         this.html += this.isList("");
         this.html += this.isCode("");
-        // this.html += this.isBlock("");
         return this.html;
     }
 
@@ -194,18 +189,6 @@ public class Markdown {
         return "";
     }
 
-    // protected String isBlock(String type) {
-    //     if (!this.isBlock && type.contains("Block")) {
-    //         this.isBlock = true;
-    //         return "<pre>";
-    //     }
-    //     if (this.isBlock && !type.contains("Block")) {
-    //         this.isBlock = false;
-    //         return "</pre>" + Markdown.LF;
-    //     }
-    //     return "";
-    // }
-
     protected int tokenize(String str) {
         String[] lines = str.split(Markdown.LF);
         int index = 0;
@@ -235,7 +218,7 @@ public class Markdown {
 
     protected void parseBlock(int index, String line) {
         switch (line.charAt(0)) {
-            case ' ': // Check for block quote
+            case ' ': // Check for code block
                 if (!this.isCode && "    ".equals(line.substring(0, 4))) {
                     this.elements.put(index, new Code(line.substring(4)));
                     return;
