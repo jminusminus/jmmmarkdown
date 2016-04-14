@@ -160,7 +160,7 @@ public class Markdown {
             return "</p>" + Markdown.LF;
         }
         if (this.isParagraph) {
-            return "<br/>";
+            return " ";
         }
         return "";
     }

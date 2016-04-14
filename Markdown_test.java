@@ -44,7 +44,7 @@ public class Markdown_test extends Test {
         this.should("contains a P tag with many lines");
         Markdown p = new Markdown();
         String html = p.parseStr("some text.\nmore text.\nand more.").toString();
-        this.assertEqual("<p>some text.<br/>more text.<br/>and more.</p>\n", html);
+        this.assertEqual("<p>some text. more text. and more.</p>\n", html);
     }
 
     public void test_parse_paragraph_starting_with_space() {
