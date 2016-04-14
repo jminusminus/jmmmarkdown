@@ -195,8 +195,11 @@ public class Markdown {
         for (String line : lines) {
             if (line.trim().length() > 0 || this.isCode) {
                 this.parseLine(index, line);
-                index++;
+            } else {
+                // Add empty space.
+                this.elements.put(index, "");
             }
+            index++;
         }
         return index;
     }
