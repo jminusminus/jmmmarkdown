@@ -30,7 +30,7 @@ public class Markdown_test extends Test {
         this.should("return the count of block tokens found");
         Markdown p = new Markdown();
         int count = p.tokenize(this.getBasic());
-        this.assertEqual(37, count);
+        this.assertEqual(48, count);
     }
 
     public void test_parse_paragraph() {
